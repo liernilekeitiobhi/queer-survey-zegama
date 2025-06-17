@@ -21,21 +21,48 @@ body {
     line-height: 1.6;
     background: linear-gradient(135deg, #fff5f5 0%, #f0f9ff 50%, #faf5ff 100%);
     min-height: 100vh;
+    color: #2d3748 !important;
+}
+
+/* Text color overrides for dark theme compatibility */
+h1, h2, h3, h4, h5, h6 {
+    color: #2d3748 !important;
+}
+
+p, span, label, .form-label {
+    color: #4a5568 !important;
+}
+
+.lead {
+    color: #4a5568 !important;
+}
+
+.card-title {
+    color: #2d3748 !important;
+}
+
+.card-text {
+    color: #4a5568 !important;
 }
 
 /* Custom navbar styling */
 .navbar-brand {
     font-weight: 700;
     font-size: 1.25rem;
-    background: linear-gradient(45deg, var(--warm-pink), var(--sunny-orange), var(--happy-yellow));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white !important;
 }
 
 .navbar {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: white !important;
 }
 
 /* Pride gradient background for special sections */
@@ -73,8 +100,13 @@ body {
 .form-select,
 .form-control {
     border-radius: 0.75rem;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+    color: #2d3748 !important;
+}
+
+.form-check-label {
+    color: #2d3748 !important;
 }
 
 /* Button enhancements */
@@ -341,9 +373,33 @@ html {
 }
 
 /* Dark mode adjustments */
+/* Override Bootstrap dark theme */
+[data-bs-theme="dark"] body {
+    background: linear-gradient(135deg, #fff5f5 0%, #f0f9ff 50%, #faf5ff 100%) !important;
+    color: #2d3748 !important;
+}
+
 [data-bs-theme="dark"] .card {
-    background-color: var(--bs-dark);
-    border-color: rgba(255, 255, 255, 0.125);
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #2d3748 !important;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-bs-theme="dark"] h1, 
+[data-bs-theme="dark"] h2, 
+[data-bs-theme="dark"] h3, 
+[data-bs-theme="dark"] h4, 
+[data-bs-theme="dark"] h5, 
+[data-bs-theme="dark"] h6 {
+    color: #2d3748 !important;
+}
+
+[data-bs-theme="dark"] p,
+[data-bs-theme="dark"] span,
+[data-bs-theme="dark"] .lead,
+[data-bs-theme="dark"] .card-text,
+[data-bs-theme="dark"] .form-label {
+    color: #4a5568 !important;
 }
 
 [data-bs-theme="dark"] .bg-gradient-primary {
