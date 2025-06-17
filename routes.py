@@ -22,7 +22,11 @@ def info():
 
 @app.route('/results')
 def results():
-    """Results visualization page"""
+    """Results visualization page - only accessible after completing survey"""
+    from flask import session
+    if not session.get('survey_completed'):
+        flash('Please complete the survey first to view results.', 'info')
+        return redirect(url_for('survey'))
     return render_template('results.html')
 
 @app.route('/submit_survey', methods=['POST'])
@@ -57,6 +61,9 @@ def submit_survey():
         
         if success:
             flash('Thank you for your response! Your submission has been recorded.', 'success')
+            # Store survey completion in session to allow access to results
+            from flask import session
+            session['survey_completed'] = True
             return redirect(url_for('results'))
         else:
             flash('There was an error saving your response. Please try again.', 'error')
