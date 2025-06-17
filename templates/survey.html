@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+
+{% block title %}LGBTQI+ Community Survey - Survey Form{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Survey Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-poll text-warning"></i>
+                    Community Survey
+                </h1>
+                <p class="lead">
+                    Your responses help us understand the needs and experiences of our LGBTQI+ community.
+                    All responses are anonymous and confidential.
+                </p>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Estimated time:</strong> 5-10 minutes
+                </div>
+            </div>
+
+            <!-- Survey Form -->
+            <form method="POST" action="{{ url_for('submit_survey') }}" id="surveyForm">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <!-- Demographics Section -->
+                        <h4 class="mb-4">
+                            <i class="fas fa-user"></i>
+                            Demographics
+                        </h4>
+
+                        <!-- Age Group -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Age Group *</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="age_group" value="Under 18" id="age1" required>
+                                        <label class="form-check-label" for="age1">Under 18</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="age_group" value="18-24" id="age2" required>
+                                        <label class="form-check-label" for="age2">18-24</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="age_group" value="25-34" id="age3" required>
+                                        <label class="form-check-label" for="age3">25-34</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="age_group" value="35-44" id="age4" required>
+                                        <label class="form-check-label" for="age4">35-44</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="age_group" value="45-54" id="age5" required>
+                                        <label class="form-check-label" for="age5">45-54</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="age_group" value="55+" id="age6" required>
+                                        <label class="form-check-label" for="age6">55+</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gender Identity -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Gender Identity *</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Woman" id="gender1" required>
+                                        <label class="form-check-label" for="gender1">Woman</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Man" id="gender2" required>
+                                        <label class="form-check-label" for="gender2">Man</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Non-binary" id="gender3" required>
+                                        <label class="form-check-label" for="gender3">Non-binary</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Transgender" id="gender4" required>
+                                        <label class="form-check-label" for="gender4">Transgender</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Gender fluid" id="gender5" required>
+                                        <label class="form-check-label" for="gender5">Gender fluid</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Prefer to self-describe" id="gender6" required>
+                                        <label class="form-check-label" for="gender6">Prefer to self-describe</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sexual Orientation -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Sexual Orientation *</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Heterosexual" id="orientation1" required>
+                                        <label class="form-check-label" for="orientation1">Heterosexual</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Gay" id="orientation2" required>
+                                        <label class="form-check-label" for="orientation2">Gay</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Lesbian" id="orientation3" required>
+                                        <label class="form-check-label" for="orientation3">Lesbian</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Bisexual" id="orientation4" required>
+                                        <label class="form-check-label" for="orientation4">Bisexual</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Pansexual" id="orientation5" required>
+                                        <label class="form-check-label" for="orientation5">Pansexual</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Asexual" id="orientation6" required>
+                                        <label class="form-check-label" for="orientation6">Asexual</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Queer" id="orientation7" required>
+                                        <label class="form-check-label" for="orientation7">Queer</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Prefer not to say" id="orientation8" required>
+                                        <label class="form-check-label" for="orientation8">Prefer not to say</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Community Experiences Section -->
+                        <h4 class="mb-4">
+                            <i class="fas fa-users"></i>
+                            Community Experiences
+                        </h4>
+
+                        <!-- Community Safety -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">How safe do you feel being open about your LGBTQI+ identity in this community?</label>
+                            <select name="community_safety" class="form-select">
+                                <option value="">Select an option...</option>
+                                <option value="Very safe">Very safe</option>
+                                <option value="Somewhat safe">Somewhat safe</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Somewhat unsafe">Somewhat unsafe</option>
+                                <option value="Very unsafe">Very unsafe</option>
+                            </select>
+                        </div>
+
+                        <!-- Discrimination Experience -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Have you experienced discrimination based on your LGBTQI+ identity in the past year?</label>
+                            <select name="discrimination_experience" class="form-select">
+                                <option value="">Select an option...</option>
+                                <option value="Yes, frequently">Yes, frequently</option>
+                                <option value="Yes, occasionally">Yes, occasionally</option>
+                                <option value="Yes, rarely">Yes, rarely</option>
+                                <option value="No">No</option>
+                                <option value="Prefer not to answer">Prefer not to answer</option>
+                            </select>
+                        </div>
+
+                        <!-- Support Services -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">What support services would be most valuable to the LGBTQI+ community?</label>
+                            <select name="support_services" class="form-select">
+                                <option value="">Select an option...</option>
+                                <option value="Mental health counseling">Mental health counseling</option>
+                                <option value="Legal advocacy">Legal advocacy</option>
+                                <option value="Youth programs">Youth programs</option>
+                                <option value="Social events and meetups">Social events and meetups</option>
+                                <option value="Educational workshops">Educational workshops</option>
+                                <option value="Employment assistance">Employment assistance</option>
+                                <option value="Healthcare navigation">Healthcare navigation</option>
+                                <option value="Housing assistance">Housing assistance</option>
+                            </select>
+                        </div>
+
+                        <!-- Community Acceptance -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">How would you rate the overall acceptance of LGBTQI+ people in this community?</label>
+                            <select name="community_acceptance" class="form-select">
+                                <option value="">Select an option...</option>
+                                <option value="Excellent">Excellent</option>
+                                <option value="Good">Good</option>
+                                <option value="Fair">Fair</option>
+                                <option value="Poor">Poor</option>
+                                <option value="Very poor">Very poor</option>
+                            </select>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Specific Concerns Section -->
+                        <h4 class="mb-4">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Specific Concerns
+                        </h4>
+
+                        <!-- Employment -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Do you have concerns about employment discrimination based on your LGBTQI+ identity?</label>
+                            <select name="employment_concerns" class="form-select">
+                                <option value="">Select an option...</option>
+                                <option value="Very concerned">Very concerned</option>
+                                <option value="Somewhat concerned">Somewhat concerned</option>
+                                <option value="Not very concerned">Not very concerned</option>
+                                <option value="Not concerned at all">Not concerned at all</option>
+                                <option value="Not applicable">Not applicable</option>
+                            </select>
+                        </div>
+
+                        <!-- Healthcare -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">How would you rate access to LGBTQI+-affirming healthcare in this area?</label>
+                            <select name="healthcare_access" class="form-select">
+                                <option value="">Select an option...</option>
+                                <option value="Excellent">Excellent</option>
+                                <option value="Good">Good</option>
+                                <option value="Fair">Fair</option>
+                                <option value="Poor">Poor</option>
+                                <option value="Very poor">Very poor</option>
+                                <option value="Don't know">Don't know</option>
+                            </select>
+                        </div>
+
+                        <!-- Housing -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Do you have concerns about housing discrimination based on your LGBTQI+ identity?</label>
+                            <select name="housing_concerns" class="form-select">
+                                <option value="">Select an option...</option>
+                                <option value="Very concerned">Very concerned</option>
+                                <option value="Somewhat concerned">Somewhat concerned</option>
+                                <option value="Not very concerned">Not very concerned</option>
+                                <option value="Not concerned at all">Not concerned at all</option>
+                                <option value="Not applicable">Not applicable</option>
+                            </select>
+                        </div>
+
+                        <!-- Additional Comments -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Additional Comments (Optional)</label>
+                            <textarea name="additional_comments" class="form-control" rows="4" placeholder="Please share any additional thoughts, experiences, or suggestions..."></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning btn-lg">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit Survey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/survey.js') }}"></script>
+{% endblock %}

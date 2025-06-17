@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block title %}LGBTQI+ Community Survey - Results{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold mb-3">
+            <i class="fas fa-chart-bar text-success"></i>
+            Survey Results
+        </h1>
+        <p class="lead">
+            Community insights from survey responses help inform local policy and support initiatives.
+        </p>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="text-center py-5">
+        <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-3">Loading survey data...</p>
+    </div>
+
+    <!-- No Data State -->
+    <div id="noDataState" class="text-center py-5" style="display: none;">
+        <div class="card shadow">
+            <div class="card-body py-5">
+                <i class="fas fa-chart-line fa-5x text-muted mb-4"></i>
+                <h3 class="text-muted">No Survey Responses Yet</h3>
+                <p class="lead text-muted mb-4">
+                    Be the first to contribute to our community assessment!
+                </p>
+                <a href="{{ url_for('survey') }}" class="btn btn-warning btn-lg">
+                    <i class="fas fa-poll"></i> Take the Survey
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Content -->
+    <div id="resultsContent" style="display: none;">
+        <!-- Statistics Overview -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-3x text-warning mb-3"></i>
+                        <h3 id="totalResponses" class="text-warning">0</h3>
+                        <p class="text-muted">Total Responses</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="fas fa-chart-pie fa-3x text-info mb-3"></i>
+                        <h3 id="ageGroups" class="text-info">0</h3>
+                        <p class="text-muted">Age Groups</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="fas fa-heart fa-3x text-danger mb-3"></i>
+                        <h3 id="genderIdentities" class="text-danger">0</h3>
+                        <p class="text-muted">Gender Identities</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="fas fa-rainbow fa-3x text-success mb-3"></i>
+                        <h3 id="orientations" class="text-success">0</h3>
+                        <p class="text-muted">Orientations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row g-4">
+            <!-- Age Groups Chart -->
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-birthday-cake text-warning"></i>
+                            Age Distribution
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="ageChart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gender Identity Chart -->
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-venus-mars text-info"></i>
+                            Gender Identity
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="genderChart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sexual Orientation Chart -->
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-heart text-danger"></i>
+                            Sexual Orientation
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="orientationChart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Safety Chart -->
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-shield-alt text-success"></i>
+                            Community Safety Perception
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="safetyChart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discrimination Experience Chart -->
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-exclamation-triangle text-warning"></i>
+                            Discrimination Experience
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="discriminationChart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Services Chart -->
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-hands-helping text-primary"></i>
+                            Most Needed Support Services
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="servicesChart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Acceptance Chart -->
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-users text-info"></i>
+                            Community Acceptance Rating
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="acceptanceChart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Healthcare Access Chart -->
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-stethoscope text-danger"></i>
+                            Healthcare Access Rating
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="healthcareChart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Insights -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow border-info">
+                    <div class="card-header bg-info text-white">
+                        <h4 class="mb-0">
+                            <i class="fas fa-lightbulb"></i>
+                            Key Insights
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="keyInsights">
+                            <!-- Insights will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Items -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card shadow border-warning">
+                    <div class="card-header bg-warning text-dark">
+                        <h4 class="mb-0">
+                            <i class="fas fa-tasks"></i>
+                            Recommended Actions for Council
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="actionItems">
+                            <!-- Action items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refresh Data -->
+    <div class="text-center mt-5">
+        <button onclick="loadResults()" class="btn btn-outline-warning">
+            <i class="fas fa-sync-alt"></i> Refresh Data
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% endblock %}

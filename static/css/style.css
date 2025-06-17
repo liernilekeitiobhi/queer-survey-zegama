@@ -1,0 +1,227 @@
+/* Custom styles for LGBTQI+ Community Survey */
+
+/* Root variables for consistent theming */
+:root {
+    --pride-red: #e74c3c;
+    --pride-orange: #f39c12;
+    --pride-yellow: #f1c40f;
+    --pride-green: #27ae60;
+    --pride-blue: #3498db;
+    --pride-purple: #9b59b6;
+}
+
+/* Body and layout */
+body {
+    line-height: 1.6;
+}
+
+/* Custom navbar styling */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* Pride gradient background for special sections */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--pride-red), var(--pride-orange), var(--pride-yellow), var(--pride-green), var(--pride-blue), var(--pride-purple));
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Form styling enhancements */
+.form-check-input:checked {
+    background-color: var(--bs-warning);
+    border-color: var(--bs-warning);
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: var(--bs-warning);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+/* Button enhancements */
+.btn {
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+/* Chart container styling */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Loading spinner customization */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Alert customizations */
+.alert {
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+/* Statistics cards */
+.card-body i {
+    opacity: 0.8;
+}
+
+/* Rainbow text effect for special elements */
+.rainbow-text {
+    background: linear-gradient(to right, var(--pride-red), var(--pride-orange), var(--pride-yellow), var(--pride-green), var(--pride-blue), var(--pride-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 1.75rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* SVG styling */
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Accessibility improvements */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Focus indicators for better accessibility */
+.btn:focus,
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+    outline: 2px solid var(--bs-warning);
+    outline-offset: 2px;
+}
+
+/* Card header styling */
+.card-header {
+    border-bottom: 2px solid rgba(255, 193, 7, 0.2);
+    font-weight: 600;
+}
+
+/* Footer styling */
+footer {
+    margin-top: auto;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom margins and padding utilities */
+.py-6 {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+}
+
+.my-6 {
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
+}
+
+/* Chart.js responsive overrides */
+.chart-container canvas {
+    max-height: 400px;
+}
+
+/* Progress indicators for multi-step forms */
+.progress-step {
+    position: relative;
+    padding: 1rem;
+    background: rgba(255, 193, 7, 0.1);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.progress-step.active {
+    background: rgba(255, 193, 7, 0.2);
+    border-left: 4px solid var(--bs-warning);
+}
+
+/* Tooltips for charts */
+.chart-tooltip {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+}
+
+/* Dark mode adjustments */
+[data-bs-theme="dark"] .card {
+    background-color: var(--bs-dark);
+    border-color: rgba(255, 255, 255, 0.125);
+}
+
+[data-bs-theme="dark"] .bg-gradient-primary {
+    opacity: 0.9;
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .btn,
+    footer {
+        display: none !important;
+    }
+    
+    .card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+    }
+    
+    .container {
+        max-width: none !important;
+    }
+}
