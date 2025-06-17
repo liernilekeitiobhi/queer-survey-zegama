@@ -83,8 +83,8 @@ function createCharts(data) {
     
     // Color schemes
     const prideColors = [
-        '#e74c3c', '#f39c12', '#f1c40f', 
-        '#27ae60', '#3498db', '#9b59b6'
+        '#ff6b9d', '#ff8e53', '#ffd93d', 
+        '#6bcf7f', '#4d96ff', '#9775fa'
     ];
     
     const safetyColors = [

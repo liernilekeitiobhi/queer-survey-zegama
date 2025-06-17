@@ -19,10 +19,10 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('index') }}">
-                <i class="fas fa-heart text-warning"></i>
+                <span style="font-size: 1.5rem; margin-right: 0.5rem;">💝</span>
                 LGBTQI+ Community Survey
             </a>
             
@@ -33,13 +33,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('survey') }}">
-                            <i class="fas fa-poll"></i> Take Survey
+                        <a class="nav-link" href="{{ url_for('survey') }}" style="font-weight: 600;">
+                            <span style="margin-right: 0.5rem;">📝</span> Take Survey
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('info') }}">
-                            <i class="fas fa-info-circle"></i> Info
+                        <a class="nav-link" href="{{ url_for('info') }}" style="font-weight: 600;">
+                            <span style="margin-right: 0.5rem;">ℹ️</span> Info
                         </a>
                     </li>
                 </ul>
