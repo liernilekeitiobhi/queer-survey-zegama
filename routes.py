@@ -1,7 +1,18 @@
 from flask import render_template, request, jsonify, redirect, url_for, flash
 from app import app
-from google_sheets import sheets_manager
 import logging
+
+import gspread
+from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load .env file
+
+
+
+# Get Sheet ID from .env
+SHEET_ID = os.getenv("SHEET_ID")
 
 logger = logging.getLogger(__name__)
 
@@ -22,67 +33,137 @@ def info():
 
 @app.route('/results')
 def results():
-    """Results visualization page - only accessible after completing survey"""
-    from flask import session
-    if not session.get('survey_completed'):
-        flash('Please complete the survey first to view results.', 'info')
-        return redirect(url_for('survey'))
-    return render_template('results.html')
-
-@app.route('/submit_survey', methods=['POST'])
-def submit_survey():
-    """Handle survey form submission"""
     try:
-        # Get form data
-        response_data = {
-            'age_group': request.form.get('age_group'),
-            'gender_identity': request.form.get('gender_identity'),
-            'sexual_orientation': request.form.get('sexual_orientation'),
-            'relationship_status': request.form.get('relationship_status'),
-            'community_safety': request.form.get('community_safety'),
-            'discrimination_experience': request.form.get('discrimination_experience'),
-            'support_services': request.form.get('support_services'),
-            'community_acceptance': request.form.get('community_acceptance'),
-            'employment_concerns': request.form.get('employment_concerns'),
-            'healthcare_access': request.form.get('healthcare_access'),
-            'housing_concerns': request.form.get('housing_concerns'),
-            'additional_comments': request.form.get('additional_comments')
-        }
+        gc = gspread.service_account(filename=os.getenv("CREDENTIALS_PATH"))
+        sheet = gc.open_by_key(SHEET_ID).sheet1
+        records = sheet.get_all_records()
         
-        # Validate required fields
-        required_fields = ['age_group', 'gender_identity', 'sexual_orientation']
-        for field in required_fields:
-            if not response_data.get(field):
-                flash(f'Please fill in the {field.replace("_", " ").title()} field.', 'error')
-                return redirect(url_for('survey'))
+        # Get unique values for filters
+        age_groups = sorted(set(str(r['ADINA']) for r in records if r.get('ADINA')))
+        genders = sorted(set(str(r['GENERO_IDENTITATEA']) for r in records if r.get('GENERO_IDENTITATEA')))
+        orientations = sorted(set(str(r['SEXU_ORIENTAZIOA']) for r in records if r.get('SEXU_ORIENTAZIOA')))
         
-        # Save to Google Sheets
-        success = sheets_manager.save_survey_response(response_data)
+        # Get multiple filter parameters
+        age_filters = request.args.getlist('age')
+        gender_filters = request.args.getlist('gender')
+        orientation_filters = request.args.getlist('orientation')
         
-        if success:
-            flash('Thank you for your response! Your submission has been recorded.', 'success')
-            # Store survey completion in session to allow access to results
-            from flask import session
-            session['survey_completed'] = True
-            return redirect(url_for('results'))
-        else:
-            flash('There was an error saving your response. Please try again.', 'error')
-            return redirect(url_for('survey'))
-            
+        # Filter records
+        filtered_records = records
+        if age_filters:
+            filtered_records = [r for r in filtered_records if str(r.get('ADINA')) in age_filters]
+        if gender_filters:
+            filtered_records = [r for r in filtered_records if str(r.get('GENERO_IDENTITATEA')) in gender_filters]
+        if orientation_filters:
+            filtered_records = [r for r in filtered_records if str(r.get('SEXU_ORIENTAZIOA')) in orientation_filters]
+        
+        stats = calculate_statistics(filtered_records)
+        
+        return render_template('results.html', 
+                           stats=stats,
+                           age_groups=age_groups,
+                           genders=genders,
+                           orientations=orientations,
+                           current_filters={
+                               'age': age_filters,
+                               'gender': gender_filters,
+                               'orientation': orientation_filters
+                           })
     except Exception as e:
-        logger.error(f"Error submitting survey: {e}")
-        flash('An unexpected error occurred. Please try again.', 'error')
-        return redirect(url_for('survey'))
+        logger.error(f"Error in results: {str(e)}")
+        flash('Errorea gertatu da emaitzak kargatzean', 'error')
+        return redirect(url_for('index'))
 
-@app.route('/api/statistics')
-def api_statistics():
-    """API endpoint to get survey statistics for charts"""
+def calculate_statistics(records):
+    """Calculate statistics from filtered records using the actual column names"""
+    stats = {
+        'total_responses': len(records),
+        'knowledge': {},                  # SIGLEN_EZAGUTZA
+        'proud_day': {},                   # EKAINAK_28_EZAGUTZA
+        'culture_participation': {},       # PARTEHARTZEA
+        'ally': {},                        # ALIATUA
+        'freedom_zegama': {},              # ASKATASUNA_ZEGAMAN
+        'freedom_euskal_herria': {},       # ASKATASUNA_EUSKAL_HERRIAN
+        'discrimination_experience': {},   # DISKRIMINAZIO_ESPERIENTZIAK
+        'homofobic_language': {},          # HIZKUNTZA_HOMOFOBOA_1
+        'homofobic_language2': {},         # HIZKUNTZA_HOMOFOBOA_2
+        'homofobic_language3': {},         # HIZKUNTZA_HOMOFOBOA_3
+        'homofobic_language4': {},         # HIZKUNTZA_HOMOFOBOA_4
+        'secure_spaces': {},               # ESPAZIO_SEGURU_GEHIAGO
+        'colective_thinking': {}           # SOLASALDIAN_PARTEHARTZEA
+    }
+    
+    # Field mapping between code names and actual column names
+    field_mapping = {
+        'knowledge': 'SIGLEN_EZAGUTZA',
+        'proud_day': 'EKAINAK_28_EZAGUTZA',
+        'culture_participation': 'PARTEHARTZEA',
+        'ally': 'ALIATUA',
+        'freedom_zegama': 'ASKATASUNA_ZEGAMAN',
+        'freedom_euskal_herria': 'ASKATASUNA_EUSKAL_HERRIAN',
+        'discrimination_experience': 'DISKRIMINAZIO_ESPERIENTZIAK',
+        'homofobic_language': 'HIZKUNTZA_HOMOFOBOA_1',
+        'homofobic_language2': 'HIZKUNTZA_HOMOFOBOA_2',
+        'homofobic_language3': 'HIZKUNTZA_HOMOFOBOA_3',
+        'homofobic_language4': 'HIZKUNTZA_HOMOFOBOA_4',
+        'secure_spaces': 'ESPAZIO_SEGURU_GEHIAGO',
+        'colective_thinking': 'SOLASALDIAN_PARTEHARTZEA'
+    }
+    
+    for record in records:
+        for stat_field, sheet_column in field_mapping.items():
+            if sheet_column in record:
+                value = record[sheet_column]
+                if value and str(value).strip():  # Only count non-empty values
+                    stats[stat_field][value] = stats[stat_field].get(value, 0) + 1
+    
+    print("Calculated stats:", stats)  # Debug output
+    return stats
+
+
+def save_to_sheet(data):
     try:
-        stats = sheets_manager.get_survey_statistics()
-        return jsonify(stats)
+        
+        gc = gspread.service_account(filename=os.getenv("CREDENTIALS_PATH"))
+        sheet = gc.open_by_key(SHEET_ID).sheet1
+        # Add a timestamp and survey data
+        row = [
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            data.get('age_group'),
+            data.get('gender_identity'),
+            data.get('sexual_orientation'),
+            data.get('knowledge'),
+            data.get('proud-day'),
+            data.get('culture-participation'),
+            data.get('ally'),
+            data.get('freedom-zegama'),
+            data.get('freedom-euskal-herria'),
+            data.get('discrimination-experience'),
+            data.get('homofobic-language'),
+            data.get('homofobic-language2'),
+            data.get('homofobic-language3'),
+            data.get('homofobic-language4'),
+            data.get('secure-spaces'),
+            data.get('colective-thinking'),
+            data.get('additional_comments')
+        ]        
+        sheet.append_row(row)
+        return True
     except Exception as e:
-        logger.error(f"Error getting statistics: {e}")
-        return jsonify({'error': 'Unable to fetch statistics'}), 500
+        print(f"Error: {e}")
+        return False
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    data = request.form.to_dict()
+    if save_to_sheet(data):
+        return jsonify({"status": "success"})
+    return jsonify({"status": "error"}), 500
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 
 @app.errorhandler(404)
 def not_found(error):

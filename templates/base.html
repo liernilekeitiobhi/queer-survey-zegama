@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}LGBTQI+ Community Survey{% endblock %}</title>
+    <title>{% block title %}LGBTQI+ Inkesta Zegaman{% endblock %}</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,14 +16,15 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('index') }}">
-                <span style="font-size: 1.5rem; margin-right: 0.5rem;">💝</span>
-                LGBTQI+ Community Survey
+                <span style="font-size: 1.5rem; margin-right: 0.5rem;">🏳️‍🌈</span>
+                LGBTQI+ Inkesta Zegaman
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -34,12 +35,17 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('survey') }}" style="font-weight: 600;">
-                            <span style="margin-right: 0.5rem;">📝</span> Take Survey
+                            <span style="margin-right: 0.5rem;">📝</span> Bete inkesta
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('info') }}" style="font-weight: 600;">
-                            <span style="margin-right: 0.5rem;">ℹ️</span> Info
+                            <span style="margin-right: 0.5rem;">ℹ️</span> Informazioa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('results') }}" style="font-weight: 600;">
+                            <span style="margin-right: 0.5rem;">📊​</span> Emaitzak
                         </a>
                     </li>
                 </ul>
@@ -70,15 +76,7 @@
     <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <h5>LGBTQI+ Community Survey</h5>
-                    <p class="text-muted">Building an inclusive community through understanding and dialogue.</p>
-                </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="text-muted">
-                        <i class="fas fa-shield-alt"></i>
-                        Your responses are anonymous and confidential
-                    </p>
                 </div>
             </div>
         </div>

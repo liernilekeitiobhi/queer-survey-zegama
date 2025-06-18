@@ -29,8 +29,12 @@ h1, h2, h3, h4, h5, h6 {
     color: #2d3748 !important;
 }
 
-p, span, label, .form-label {
+p, label, .form-label {
     color: #4a5568 !important;
+}
+span {
+    color: #ffffff !important;
+
 }
 
 .lead {
@@ -124,6 +128,7 @@ p, span, label, .form-label {
     border: none;
     color: white;
     box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    height: 100px;
 }
 
 .btn-warning:hover {
@@ -423,4 +428,94 @@ html {
     .container {
         max-width: none !important;
     }
+}
+
+/* Chart containers */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Filter form styles */
+#filterForm .form-select {
+    margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .chart-container {
+        height: 250px;
+    }
+}
+
+/* Añade esto a tu archivo CSS */
+.filter-options {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.form-check {
+    margin-bottom: 5px;
+}
+
+.form-check-input {
+    margin-right: 8px;
+}
+
+.filter-active {
+    background-color: #e9f7fe;
+    font-weight: bold;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .accordion-body {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    
+    .accordion-button {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .form-check {
+        padding-left: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-check-input {
+        width: 1.1em;
+        height: 1.1em;
+        margin-top: 0.15em;
+    }
+    
+    .form-check-label {
+        font-size: 0.85rem;
+    }
+    
+    .btn {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Show active filter count on accordion headers */
+.accordion-button::after {
+    margin-left: auto;
+    content: attr(data-count);
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    margin-right: 10px;
 }

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}LGBTQI+ Community Survey - Survey Form{% endblock %}
+{% block title %}LGBTQI+ inkesta Zegaman {% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -10,36 +10,36 @@
             <div class="text-center mb-4">
                 <h1 class="h2 fw-bold mb-3">
                     <span style="font-size: 2.5rem;">📝</span>
-                    Share Your Story
+                    INKESTA
                 </h1>
                 <p class="mb-3" style="color: #4a5568; font-size: 1.1rem;">
-                    Your voice matters! Help us understand our LGBTQI+ community better.
-                    All responses are completely anonymous and confidential.
+                    Guztion erantzunak behar ditugu! Lagundu gure LGBTQI+ komunitatea hobeto ezagutzen.
+                    Erantzun guztiak anonimoak eta konfidentzialak dira.
                 </p>
                 <div class="alert d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(255, 142, 83, 0.1)); border: 2px solid rgba(255, 107, 157, 0.2); border-radius: 1rem;">
                     <span style="font-size: 1.5rem; margin-right: 0.5rem;">⏰</span>
-                    <span style="font-weight: 600; color: #495057;"><strong>Only 5 minutes</strong> - Make your voice heard!</span>
+                    <span style="font-weight: 600; color: #495057;"><strong>3 minutu inguruko inkesta</strong> - Zure ahotsa entzun nahi dugu!</span>
                 </div>
             </div>
 
             <!-- Survey Form -->
-            <form method="POST" action="{{ url_for('submit_survey') }}" id="surveyForm">
+            <form method="POST" action="{{ url_for('submit') }}" id="surveyForm">
                 <div class="card shadow">
                     <div class="card-body survey-mobile-friendly">
                         <!-- Demographics Section -->
                         <h4 class="mb-4">
                             <span class="survey-section-emoji">👋</span>
-                            Tell us about yourself
+                            ZURI BURUZ
                         </h4>
 
                         <!-- Age Group -->
                         <div class="mb-4">
-                            <label class="form-label fw-bold">Age Group *</label>
+                            <label class="form-label fw-bold">Adin tartea *</label>
                             <div class="row g-2">
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="age_group" value="Under 18" id="age1" required>
-                                        <label class="form-check-label" for="age1">Under 18</label>
+                                        <input class="form-check-input" type="radio" name="age_group" value="18-" id="age1" required>
+                                        <label class="form-check-label" for="age1">18 baino gutxiago</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -56,20 +56,20 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="age_group" value="35-44" id="age4" required>
-                                        <label class="form-check-label" for="age4">35-44</label>
+                                        <input class="form-check-input" type="radio" name="age_group" value="35-49" id="age4" required>
+                                        <label class="form-check-label" for="age4">35-49</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="age_group" value="45-54" id="age5" required>
-                                        <label class="form-check-label" for="age5">45-54</label>
+                                        <input class="form-check-input" type="radio" name="age_group" value="50-64" id="age5" required>
+                                        <label class="form-check-label" for="age5">50-64</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="age_group" value="55+" id="age6" required>
-                                        <label class="form-check-label" for="age6">55+</label>
+                                        <input class="form-check-input" type="radio" name="age_group" value="65+" id="age6" required>
+                                        <label class="form-check-label" for="age6">65+</label>
                                     </div>
                                 </div>
                             </div>
@@ -77,42 +77,42 @@
 
                         <!-- Gender Identity -->
                         <div class="mb-4">
-                            <label class="form-label fw-bold">Gender Identity *</label>
+                            <label class="form-label fw-bold">Genero identitatea *</label>
                             <div class="row g-2">
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender_identity" value="Woman" id="gender1" required>
-                                        <label class="form-check-label" for="gender1">Woman</label>
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Emakumezkoa" id="gender1" required>
+                                        <label class="form-check-label" for="gender1">Emakumezkoa</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender_identity" value="Man" id="gender2" required>
-                                        <label class="form-check-label" for="gender2">Man</label>
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Gizonezkoa" id="gender2" required>
+                                        <label class="form-check-label" for="gender2">Gizonezkoa</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender_identity" value="Non-binary" id="gender3" required>
-                                        <label class="form-check-label" for="gender3">Non-binary</label>
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Ez binarioa" id="gender3" required>
+                                        <label class="form-check-label" for="gender3">Ez binarioa</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender_identity" value="Transgender" id="gender4" required>
-                                        <label class="form-check-label" for="gender4">Transgender</label>
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Transgeneroa" id="gender4" required>
+                                        <label class="form-check-label" for="gender4">Transgeneroa</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender_identity" value="Gender fluid" id="gender5" required>
-                                        <label class="form-check-label" for="gender5">Gender fluid</label>
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Beste termino batzuekin deskribatzen naiz" id="gender6" required>
+                                        <label class="form-check-label" for="gender6">Beste termino batzuekin deskribatzen naiz</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender_identity" value="Prefer to self-describe" id="gender6" required>
-                                        <label class="form-check-label" for="gender6">Prefer to self-describe</label>
+                                        <input class="form-check-input" type="radio" name="gender_identity" value="Ez dut esan nahi" id="gender6" required>
+                                        <label class="form-check-label" for="gender6">Ez dut esan nahi</label>
                                     </div>
                                 </div>
                             </div>
@@ -120,12 +120,12 @@
 
                         <!-- Sexual Orientation -->
                         <div class="mb-4">
-                            <label class="form-label fw-bold">Sexual Orientation *</label>
+                            <label class="form-label fw-bold">Sexu orientazioa *</label>
                             <div class="row g-2">
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Heterosexual" id="orientation1" required>
-                                        <label class="form-check-label" for="orientation1">Heterosexual</label>
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Heterosexuala" id="orientation1" required>
+                                        <label class="form-check-label" for="orientation1">Heterosexuala</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -136,26 +136,26 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Lesbian" id="orientation3" required>
-                                        <label class="form-check-label" for="orientation3">Lesbian</label>
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Lesbiana" id="orientation3" required>
+                                        <label class="form-check-label" for="orientation3">Lesbiana</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Bisexual" id="orientation4" required>
-                                        <label class="form-check-label" for="orientation4">Bisexual</label>
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Bisexuala" id="orientation4" required>
+                                        <label class="form-check-label" for="orientation4">Bisexuala</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Pansexual" id="orientation5" required>
-                                        <label class="form-check-label" for="orientation5">Pansexual</label>
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Pansexuala" id="orientation5" required>
+                                        <label class="form-check-label" for="orientation5">Pansexuala</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Asexual" id="orientation6" required>
-                                        <label class="form-check-label" for="orientation6">Asexual</label>
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Asexuala" id="orientation6" required>
+                                        <label class="form-check-label" for="orientation6">Asexuala</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -166,8 +166,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Prefer not to say" id="orientation8" required>
-                                        <label class="form-check-label" for="orientation8">Prefer not to say</label>
+                                        <input class="form-check-input" type="radio" name="sexual_orientation" value="Ez dut esan nahi" id="orientation8" required>
+                                        <label class="form-check-label" for="orientation8">Ez dut esan nahi</label>
                                     </div>
                                 </div>
                             </div>
@@ -178,122 +178,236 @@
                         <!-- Community Experiences Section -->
                         <h4 class="mb-4">
                             <span class="survey-section-emoji">🏳️‍🌈</span>
-                            Your community experiences
+                            EZAGUTZA ETA INFORMAZIOA
+                        </h4>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">1. Badakizu zer esan nahi duten LGBTQI+ siglek?</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="knowledge" value="Bai, guztiek" id="knowledge1">
+                                        <label class="form-check-label" for="knowledge1">Bai, guztien esanahia dakit</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="knowledge" value="Batzuk" id="knowledge2">
+                                        <label class="form-check-label" for="knowledge2">Batzuen esanahia dakit</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="knowledge" value="Ez" id="knowledge3">
+                                        <label class="form-check-label" for="knowledge3">Ez</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">2. Badakizu zergatik ospatzen den harrotasun eguna ekainaren 28an?</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="proud-day" value="Bai" id="proud-day1">
+                                        <label class="form-check-label" for="proud-day1">Bai</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="proud-day" value="Ez" id="proud-day2">
+                                        <label class="form-check-label" for="proud-day2">Ez</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">3. Inoiz ikusi edo parte hartu duzu LGBTQI+ komunitatearen inguruko pelikula, antzerki edo hitzaldi batean?</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="culture-participation" value="Bai" id="culture-participation1">
+                                        <label class="form-check-label" for="culture-participation1">Bai</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="culture-participation" value="Ez" id="culture-participation2">
+                                        <label class="form-check-label" for="culture-participation2">Ez</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Community Experiences Section -->
+                        <h4 class="mb-4">
+                            <span class="survey-section-emoji">🏘️​</span>
+                            PERTZEPZIO OROKORRA ETA JARRERAK ZEGAMAN
                         </h4>
 
-                        <!-- Community Safety -->
                         <div class="mb-4">
-                            <label class="form-label fw-bold">How safe do you feel being open about your LGBTQI+ identity in this community?</label>
-                            <select name="community_safety" class="form-select">
-                                <option value="">Select an option...</option>
-                                <option value="Very safe">Very safe</option>
-                                <option value="Somewhat safe">Somewhat safe</option>
-                                <option value="Neutral">Neutral</option>
-                                <option value="Somewhat unsafe">Somewhat unsafe</option>
-                                <option value="Very unsafe">Very unsafe</option>
+                            <label class="form-label fw-bold">1. Zeure burua aliatu gisa kontsideratzen duzu? (hau, da komunitatearekin elkartasunean egoten saiatzen zara)</label>
+                            <select name="ally" class="form-select">
+                                <option value="">Aukeratu...</option>
+                                <option value="Bai">Bai</option>
+                                <option value="Ez">Ez</option>
+                                <option value="Ez dakit">Ez dakit</option>
+                            </select>
+                        </div> 
+
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">2. Zure ustez, Zegaman norbaitek askatasun osoz bizi al dezake bere orientazioa edo identitatea?</label>
+                            <select name="freedom-zegama" class="form-select">
+                                <option value="">Aukeratu...</option>
+                                <option value="Bai, askatasun osoz">Bai, askatasun osoz</option>
+                                <option value="Orokorrean bai, baina egoera batzuetan ez da erosoa">Orokorrean bai, baina egoera batzuetan ez da erosoa</option>
+                                <option value="Betzuetan bai eta beste batzuetan ez">Betzuetan bai eta beste batzuetan ez</option>
+                                <option value="Orokorrean ez, egoera konkretu batzuetan izan ezik">Orokorrean ez, egoera konkretu batzuetan izan ezik</option>
+                                <option value="Ez, ez dago askatasun egoerarik">Ez, ez dago askatasun egoerarik</option>
+                            </select>
+                        </div> 
+                        
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">3. Eta Euskal Herrian, oro har?</label>
+                            <select name="freedom-euskal-herria" class="form-select">
+                                <option value="">Aukeratu...</option>
+                                <option value="Bai, askatasun osoz">Bai, askatasun osoz</option>
+                                <option value="Orokorrean bai, baina egoera batzuetan ez da erosoa">Orokorrean bai, baina egoera batzuetan ez da erosoa</option>
+                                <option value="Betzuetan bai eta beste batzuetan ez">Batzuetan bai eta beste batzuetan ez</option>
+                                <option value="Orokorrean ez, egoera konkretu batzuetan izan ezik">Orokorrean ez, egoera konkretu batzuetan izan ezik</option>
+                                <option value="Ez, ez dago askatasun egoerarik">Ez, ez dago askatasun egoerarik</option>
                             </select>
                         </div>
 
-                        <!-- Discrimination Experience -->
+                        
                         <div class="mb-4">
-                            <label class="form-label fw-bold">Have you experienced discrimination based on your LGBTQI+ identity in the past year?</label>
-                            <select name="discrimination_experience" class="form-select">
-                                <option value="">Select an option...</option>
-                                <option value="Yes, frequently">Yes, frequently</option>
-                                <option value="Yes, occasionally">Yes, occasionally</option>
-                                <option value="Yes, rarely">Yes, rarely</option>
-                                <option value="No">No</option>
-                                <option value="Prefer not to answer">Prefer not to answer</option>
+                            <label class="form-label fw-bold">4. Inoiz esperimentatu duzu diskriminaziorik Zegaman zure genero identitatea edo sexu orientazioagatik?</label>
+                            <select name="discrimination-experience" class="form-select">
+                                <option value="">Aukeratu...</option>
+                                <option value="Bai, askotan">Bai, askotan</option>
+                                <option value="Bai, batzuetan">Bai, batzuetan</option>
+                                <option value="Bai, noizean behin">Bai, noizean behin</option>
+                                <option value="Ez">Ez</option>
                             </select>
                         </div>
 
-                        <!-- Support Services -->
                         <div class="mb-4">
-                            <label class="form-label fw-bold">What support services would be most valuable to the LGBTQI+ community?</label>
-                            <select name="support_services" class="form-select">
-                                <option value="">Select an option...</option>
-                                <option value="Mental health counseling">Mental health counseling</option>
-                                <option value="Legal advocacy">Legal advocacy</option>
-                                <option value="Youth programs">Youth programs</option>
-                                <option value="Social events and meetups">Social events and meetups</option>
-                                <option value="Educational workshops">Educational workshops</option>
-                                <option value="Employment assistance">Employment assistance</option>
-                                <option value="Healthcare navigation">Healthcare navigation</option>
-                                <option value="Housing assistance">Housing assistance</option>
+                            <label class="form-label fw-bold">5. Noizbait adierazpen homofoborik entzun duzu edo erabili duzu (eskolan, kalean, tabernetan...)?</label>
+                            <select name="homofobic-language" class="form-select">
+                                <option value="">Aukeratu...</option>
+                                <option value="Bai, askotan">Bai, askotan</option>
+                                <option value="Bai, batzuetan">Bai, batzuetan</option>
+                                <option value="Bai, noizean behin">Bai, noizean behin</option>
+                                <option value="Ez">Ez</option>
                             </select>
                         </div>
 
-                        <!-- Community Acceptance -->
                         <div class="mb-4">
-                            <label class="form-label fw-bold">How would you rate the overall acceptance of LGBTQI+ people in this community?</label>
-                            <select name="community_acceptance" class="form-select">
-                                <option value="">Select an option...</option>
-                                <option value="Excellent">Excellent</option>
-                                <option value="Good">Good</option>
-                                <option value="Fair">Fair</option>
-                                <option value="Poor">Poor</option>
-                                <option value="Very poor">Very poor</option>
+                            <label class="form-label fw-bold">6. Hausnartu duzu inoiz, erabiltzen dugun hizkuntza homofoboa edo transfoboa den (esamoldeak, txisteak...)? (adb.: hi! utziek paken, marikoia!)
+                            </label>
+                            <select name="homofobic-language2" class="form-select">
+                                <option value="">Aukeratu...</option>
+                                <option value="Bai, askotan">Bai, askotan</option>
+                                <option value="Bai, batzuetan">Bai, batzuetan</option>
+                                <option value="Bai, noizean behin">Bai, noizean behin</option>
+                                <option value="Ez">Ez</option>
                             </select>
                         </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">7. Inoiz pentsatu duzu halako esamoldeek, konturatu gabe, inguruko norbait mindu dezaketela nahiz eta "broma" izan? (Adibidez, horrelako esamoldeak erabiltzen diren kuadrila batean gazte batentzat zailagoa izango da queer dela esatea)</label>
+                            <select name="homofobic-language3" class="form-select">
+                                <option value="">Aukeratu...</option>
+                                <option value="Bai, askotan">Bai, askotan</option>
+                                <option value="Bai, batzuetan">Bai, batzuetan</option>
+                                <option value="Bai, noizean behin">Bai, noizean behin</option>
+                                <option value="Ez">Ez</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">8. Galdera hauek erantzun ondoren, aldatuko zenuke 5. galderako zure erantzuna?
+                            </label>
+                            <select name="homofobic-language4" class="form-select">
+                                <option value="">Aukeratu...</option>
+                                <option value="Bai">Bai</option>
+                                <option value="Ez">Ez</option>
+                                <option value="Ez dakit / Ez dut galdera ulertzen">Ez dakit / Ez dut galdera ulertzen</option>
+                            </select>
+                        </div>                      
+
+                        
 
                         <hr class="my-4">
 
                         <!-- Specific Concerns Section -->
                         <h4 class="mb-4">
                             <span class="survey-section-emoji">💭</span>
-                            Share your thoughts
+                            JARRERA KOLEKTIBOAK ETA AUKERAK
                         </h4>
 
-                        <!-- Employment -->
+                        
                         <div class="mb-4">
-                            <label class="form-label fw-bold">Do you have concerns about employment discrimination based on your LGBTQI+ identity?</label>
-                            <select name="employment_concerns" class="form-select">
-                                <option value="">Select an option...</option>
-                                <option value="Very concerned">Very concerned</option>
-                                <option value="Somewhat concerned">Somewhat concerned</option>
-                                <option value="Not very concerned">Not very concerned</option>
-                                <option value="Not concerned at all">Not concerned at all</option>
-                                <option value="Not applicable">Not applicable</option>
-                            </select>
+                            <label class="form-label fw-bold">1. Gustatuko litzaizuke Zegaman lasaitasunez eta irekitasunez hitz egiteko espazio eta aukera gehiago egotea?</label>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="secure-spaces" value="Bai" id="secure-spaces1">
+                                            <label class="form-check-label" for="secure-spaces1">Bai</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="secure-spaces" value="Ez" id="secure-spaces2">
+                                            <label class="form-check-label" for="secure-spaces2">Ez</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            
                         </div>
 
-                        <!-- Healthcare -->
+                        
                         <div class="mb-4">
-                            <label class="form-label fw-bold">How would you rate access to LGBTQI+-affirming healthcare in this area?</label>
-                            <select name="healthcare_access" class="form-select">
-                                <option value="">Select an option...</option>
-                                <option value="Excellent">Excellent</option>
-                                <option value="Good">Good</option>
-                                <option value="Fair">Fair</option>
-                                <option value="Poor">Poor</option>
-                                <option value="Very poor">Very poor</option>
-                                <option value="Don't know">Don't know</option>
-                            </select>
+                            <label class="form-label fw-bold">2. Hausnarketa kolektibo bat egiteko solasaldi ireki bat antolatuko balitz parte hartuko zenuke?</label>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="colective-thinking" value="Bai" id="colective-thinking1">
+                                            <label class="form-check-label" for="colective-thinking1">Bai</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="colective-thinking" value="Ez" id="colective-thinking2">
+                                            <label class="form-check-label" for="colective-thinking2">Ez</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="colective-thinking" value="Ez dakit" id="colective-thinking3">
+                                            <label class="form-check-label" for="colective-thinking3">Ez dakit</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            
                         </div>
 
-                        <!-- Housing -->
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Do you have concerns about housing discrimination based on your LGBTQI+ identity?</label>
-                            <select name="housing_concerns" class="form-select">
-                                <option value="">Select an option...</option>
-                                <option value="Very concerned">Very concerned</option>
-                                <option value="Somewhat concerned">Somewhat concerned</option>
-                                <option value="Not very concerned">Not very concerned</option>
-                                <option value="Not concerned at all">Not concerned at all</option>
-                                <option value="Not applicable">Not applicable</option>
-                            </select>
-                        </div>
+                        
 
                         <!-- Additional Comments -->
                         <div class="mb-4">
-                            <label class="form-label fw-bold">Additional Comments (Optional)</label>
-                            <textarea name="additional_comments" class="form-control" rows="4" placeholder="Please share any additional thoughts, experiences, or suggestions..."></textarea>
+                            <label class="form-label fw-bold">Zerbait gehitu nahi duzu? (Aukerakoa)</label>
+                            <textarea name="additional_comments" class="form-control" rows="4" placeholder="Nahi duzuna idatzi dezakezu hemen..."></textarea>
                         </div>
 
                         <div class="d-grid">
                             <button type="submit" class="btn btn-warning btn-lg">
                                 <i class="fas fa-paper-plane"></i>
-                                Submit Survey & See Results
+                               Bidali erantzunak
                             </button>
                         </div>
                     </div>

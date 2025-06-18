@@ -8,8 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!validateForm()) {
                 e.preventDefault();
                 e.stopPropagation();
+                return false;
             }
             form.classList.add('was-validated');
+            return true;
         });
 
         // Add progress tracking
@@ -17,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add smooth scrolling for better UX
         addSmoothScrolling();
+        
+        // Add character counter for textarea
+        setupCharacterCounter();
     }
 });
 
@@ -24,18 +29,47 @@ function validateForm() {
     const requiredFields = [
         'age_group',
         'gender_identity', 
-        'sexual_orientation'
+        'sexual_orientation',
+        'knowledge',
+        'proud-day',
+        'culture-participation',
+        'secure-spaces',
+        'colective-thinking'
+    ];
+    
+    const requiredSelects = [
+        'ally',
+        'freedom-zegama',
+        'freedom-euskal-herria',
+        'discrimination-experience',
+        'homofobic-language',
+        'homofobic-language2',
+        'homofobic-language3',
+        'homofobic-language4'
     ];
     
     let isValid = true;
     const errors = [];
     
-    // Check required fields
+    // Check required radio buttons
     requiredFields.forEach(fieldName => {
-        const field = document.querySelector(`input[name="${fieldName}"]:checked`);
+        const field = document.querySelector(`[name="${fieldName}"]:checked`);
         if (!field) {
+            const label = document.querySelector(`label[for="${fieldName}"]`);
+            const fieldLabel = label ? label.textContent.replace('*', '').trim() : fieldName.replace('_', ' ');
+            errors.push(`Mesedez, bete "${fieldLabel}" eremua`);
             isValid = false;
-            errors.push(`Please select your ${fieldName.replace('_', ' ')}`);
+        }
+    });
+    
+    // Check required selects
+    requiredSelects.forEach(selectName => {
+        const select = document.querySelector(`select[name="${selectName}"]`);
+        if (select && select.value === "") {
+            const label = select.previousElementSibling;
+            const fieldLabel = label ? label.textContent.replace('*', '').trim() : selectName.replace('-', ' ');
+            errors.push(`Mesedez, aukeratu "${fieldLabel}" eremurako`);
+            isValid = false;
         }
     });
     
@@ -56,7 +90,7 @@ function showValidationErrors(errors) {
     const alertHtml = `
         <div class="alert alert-danger alert-dismissible fade show validation-alert" role="alert">
             <i class="fas fa-exclamation-triangle"></i>
-            <strong>Please correct the following errors:</strong>
+            <strong>Mesedez, zuzendu ondoko erroreak:</strong>
             <ul class="mb-0 mt-2">
                 ${errors.map(error => `<li>${error}</li>`).join('')}
             </ul>
@@ -73,10 +107,15 @@ function showValidationErrors(errors) {
 }
 
 function trackProgress() {
-    const sections = ['Demographics', 'Community Experiences', 'Specific Concerns'];
-    const requiredFields = document.querySelectorAll('input[required], select[required]');
-    let completedFields = 0;
-    
+    const allFields = [
+        // Radio buttons
+        ...document.querySelectorAll('input[type="radio"]'),
+        // Selects
+        ...document.querySelectorAll('select'),
+        // Textarea
+        document.querySelector('textarea[name="additional_comments"]')
+    ].filter(Boolean);
+
     // Create progress indicator
     const progressHtml = `
         <div class="progress mb-4" style="height: 8px;">
@@ -96,22 +135,43 @@ function trackProgress() {
     cardBody.insertAdjacentHTML('afterbegin', progressHtml);
     
     // Update progress when fields change
-    requiredFields.forEach(field => {
+    allFields.forEach(field => {
         field.addEventListener('change', updateProgress);
+        if (field.tagName === 'TEXTAREA') {
+            field.addEventListener('input', updateProgress);
+        }
     });
     
     function updateProgress() {
-        completedFields = 0;
-        requiredFields.forEach(field => {
-            if (field.type === 'radio') {
-                const group = document.querySelector(`input[name="${field.name}"]:checked`);
-                if (group) completedFields++;
-            } else if (field.value.trim() !== '') {
+        let completedFields = 0;
+        
+        // Check radio groups
+        const radioGroups = new Set(
+            Array.from(document.querySelectorAll('input[type="radio"]'))
+                .map(radio => radio.name)
+        );
+        
+        radioGroups.forEach(groupName => {
+            if (document.querySelector(`input[name="${groupName}"]:checked`)) {
                 completedFields++;
             }
         });
         
-        const progress = Math.round((completedFields / requiredFields.length) * 100);
+        // Check selects
+        document.querySelectorAll('select').forEach(select => {
+            if (select.value !== "") {
+                completedFields++;
+            }
+        });
+        
+        // Check textarea (optional)
+        const textarea = document.querySelector('textarea[name="additional_comments"]');
+        if (textarea && textarea.value.trim() !== '') {
+            completedFields++;
+        }
+        
+        const totalFields = radioGroups.size + document.querySelectorAll('select').length + 1;
+        const progress = Math.round((completedFields / totalFields) * 100);
         const progressBar = document.getElementById('formProgress');
         const progressText = document.getElementById('progressText');
         
@@ -121,6 +181,9 @@ function trackProgress() {
             progressText.textContent = progress + '% Complete';
         }
     }
+    
+    // Initial update
+    updateProgress();
 }
 
 function addSmoothScrolling() {
@@ -135,8 +198,7 @@ function addSmoothScrolling() {
     });
 }
 
-// Add character counter for textarea
-document.addEventListener('DOMContentLoaded', function() {
+function setupCharacterCounter() {
     const textarea = document.querySelector('textarea[name="additional_comments"]');
     
     if (textarea) {
@@ -146,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create character counter
         const counterHtml = `
             <div class="text-muted small mt-1">
-                <span id="charCount">0</span> / ${maxLength} characters
+                <span id="charCount">0</span> / ${maxLength} karaktere
             </div>
         `;
         
@@ -165,51 +227,51 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
-
-// Add form auto-save functionality (optional)
-function enableAutoSave() {
-    const form = document.getElementById('surveyForm');
-    const formData = new FormData(form);
-    
-    // Save to localStorage every 30 seconds
-    setInterval(() => {
-        const currentData = new FormData(form);
-        const dataObj = {};
-        
-        for (let [key, value] of currentData.entries()) {
-            dataObj[key] = value;
-        }
-        
-        localStorage.setItem('survey_draft', JSON.stringify(dataObj));
-    }, 30000);
-    
-    // Load saved data on page load
-    const savedData = localStorage.getItem('survey_draft');
-    if (savedData) {
-        try {
-            const dataObj = JSON.parse(savedData);
-            Object.keys(dataObj).forEach(key => {
-                const field = form.querySelector(`[name="${key}"]`);
-                if (field) {
-                    if (field.type === 'radio') {
-                        const radioButton = form.querySelector(`[name="${key}"][value="${dataObj[key]}"]`);
-                        if (radioButton) radioButton.checked = true;
-                    } else {
-                        field.value = dataObj[key];
-                    }
-                }
-            });
-        } catch (e) {
-            console.warn('Could not load saved form data:', e);
-        }
-    }
 }
 
-// Clear auto-save data when form is submitted successfully
+// Form submission handling
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if we're on the results page (meaning form was submitted)
-    if (window.location.pathname.includes('results')) {
-        localStorage.removeItem('survey_draft');
+    const form = document.getElementById('surveyForm');
+    
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateForm()) {
+                // Show loading state
+                const submitButton = form.querySelector('button[type="submit"]');
+                const originalText = submitButton.innerHTML;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Bidaltzen...';
+                submitButton.disabled = true;
+                
+                // Submit form data
+                fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok');
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        window.location.href = "{{ url_for('results') }}";
+                    } else {
+                        throw new Error('Error saving response');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showValidationErrors(['Errorea gertatu da erantzunak bidaltzean. Mesedez, saiatu berriro.']);
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                });
+            }
+        });
     }
 });

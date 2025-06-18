@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}LGBTQI+ Community Survey - Home{% endblock %}
+{% block title %}LGBTQI+ Inkesta Zegaman - Hasiera{% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -10,55 +10,29 @@
             <div class="text-center text-lg-start">
                 <h1 class="display-4 fw-bold mb-3">
                     <span style="font-size: 3rem;">🌈</span>
-                    Building Inclusive Communities
+                    Zegama inklusibo baten alde
                 </h1>
                 <p class="lead mb-4">
-                    Help us understand the needs and experiences of our LGBTQI+ community. 
-                    Your voice matters in creating a more inclusive and supportive environment for everyone.
+                    Lagunduiguzu Zegamako LGBTQI+ komunitatearen beharrak ulertzen.
+                    Zure ahotsak herri inklusibo baten alde lan egiteko balioko digu.
                 </p>
                 <div class="d-grid gap-3">
-                    <a href="{{ url_for('survey') }}" class="btn btn-warning btn-lg">
-                        <i class="fas fa-poll"></i> Take Survey Now
+                    <a href="{{ url_for('survey') }}" class="btn btn-warning btn-lg d-flex align-items-center justify-content-center gap-2">
+                        <i class="fas fa-poll"></i>
+                        <span>BETE INKESTA</span>
                     </a>
                     <a href="{{ url_for('info') }}" class="btn btn-outline-info btn-lg">
-                        <i class="fas fa-info-circle"></i> Learn More
+                        <i class="fas fa-info-circle"></i> Gehiago jakin
                     </a>
                 </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="text-center">
-                <svg width="400" height="300" viewBox="0 0 400 300" class="img-fluid">
-                    <!-- Community illustration -->
-                    <rect width="400" height="300" fill="none"/>
-                    
-                    <!-- Rainbow arc -->
-                    <path d="M 50 200 Q 200 100 350 200" stroke="#e74c3c" stroke-width="8" fill="none"/>
-                    <path d="M 60 210 Q 200 110 340 210" stroke="#f39c12" stroke-width="8" fill="none"/>
-                    <path d="M 70 220 Q 200 120 330 220" stroke="#f1c40f" stroke-width="8" fill="none"/>
-                    <path d="M 80 230 Q 200 130 320 230" stroke="#27ae60" stroke-width="8" fill="none"/>
-                    <path d="M 90 240 Q 200 140 310 240" stroke="#3498db" stroke-width="8" fill="none"/>
-                    <path d="M 100 250 Q 200 150 300 250" stroke="#9b59b6" stroke-width="8" fill="none"/>
-                    
-                    <!-- People silhouettes -->
-                    <circle cx="120" cy="220" r="15" fill="var(--bs-info)"/>
-                    <rect x="110" y="235" width="20" height="30" rx="5" fill="var(--bs-info)"/>
-                    
-                    <circle cx="200" cy="210" r="15" fill="var(--bs-warning)"/>
-                    <rect x="190" y="225" width="20" height="35" rx="5" fill="var(--bs-warning)"/>
-                    
-                    <circle cx="280" cy="220" r="15" fill="var(--bs-success)"/>
-                    <rect x="270" y="235" width="20" height="30" rx="5" fill="var(--bs-success)"/>
-                    
-                    <!-- Hearts -->
-                    <path d="M 160 180 C 155 175, 145 175, 150 185 C 155 175, 165 175, 160 180 Z" fill="#e74c3c"/>
-                    <path d="M 240 170 C 235 165, 225 165, 230 175 C 235 165, 245 165, 240 170 Z" fill="#e74c3c"/>
-                </svg>
+                <p class="lead mb-4" style="margin-top: 30px; margin-bottom: 10px;">
+                    Zure erantzun guztiak anonimoak eta konfidentzialak dira.
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- Features Section -->
+    <!-- Features Section 
     <div class="row g-4 mb-5">
         <div class="col-md-4">
             <div class="card h-100 border-0 shadow-sm">
@@ -66,10 +40,10 @@
                     <div class="mb-3">
                         <span style="font-size: 3rem;">🔒</span>
                     </div>
-                    <h5 class="card-title">Anonymous & Secure</h5>
+                    <h5 class="card-title">Anonimoa eta segurua</h5>
                     <p class="card-text">
-                        Your responses are completely anonymous and securely stored. 
-                        We prioritize your privacy and confidentiality.
+                        Zure erantzunak guztiz anonimoak dira eta segurtasunez gordeko ditugu. 
+                        Pribatutasuna eta konfidentzialtasuna dira gure lehentasunak.
                     </p>
                 </div>
             </div>
@@ -81,10 +55,10 @@
                     <div class="mb-3">
                         <span style="font-size: 3rem;">📊</span>
                     </div>
-                    <h5 class="card-title">Real Impact</h5>
+                    <h5 class="card-title">Inpaktu erreala</h5>
                     <p class="card-text">
-                        Survey results directly inform local council decisions and 
-                        community support initiatives.
+                        Inkestako emaitzek zuzenean erangingo diote herrian hartzen diren erabakiei eta
+                        komuniatearen alde egiten ditugun ekintzei.
                     </p>
                 </div>
             </div>
@@ -96,32 +70,32 @@
                     <div class="mb-3">
                         <span style="font-size: 3rem;">🤝</span>
                     </div>
-                    <h5 class="card-title">Community Driven</h5>
+                    <h5 class="card-title">Herriak zuzenduta</h5>
                     <p class="card-text">
-                        Built by the community, for the community. 
-                        Together we can create positive change.
+                        Herritik eta herriarentzat. 
+                        Guztion artean aldaketa positibo bat sortu dezakegu.
                     </p>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
-    <!-- Call to Action -->
+    <!-- Call to Action 
     <div class="row">
         <div class="col-12">
             <div class="card bg-dark text-light">
                 <div class="card-body text-center py-5">
-                    <h3 class="mb-3">Ready to Share Your Voice?</h3>
+                    <h3 class="mb-3">Zure ahotsa partekatzeko prest?</h3>
                     <p class="lead mb-4">
-                        The survey takes approximately 5-10 minutes to complete. 
-                        Every response helps build a more inclusive community.
+                        Erantzun guztiek balio digute. Ez dago erantzun okerrik eta erantzun zurenik, denek balio dute gure herriaren alde egiteko.
                     </p>
-                    <a href="{{ url_for('survey') }}" class="btn btn-warning btn-lg">
-                        <i class="fas fa-poll"></i> Start Survey Now
+                    <a href="{{ url_for('survey') }}" style="color:white;" class="btn btn-warning btn-lg d-flex align-items-center justify-content-center gap-2">
+                        <i class="fas fa-poll"></i>
+                        <span>BETE INKESTA</span>
                     </a>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 {% endblock %}
