@@ -34,7 +34,10 @@ def info():
 @app.route('/results')
 def results():
     try:
-        gc = gspread.service_account(filename=os.getenv("CREDENTIALS_PATH"))
+        creds_path = "temp_credentials.json"
+        with open(creds_path, "w") as f:
+            f.write(os.environ["GOOGLE_CREDS"])
+        gc = gspread.service_account(filename=creds_path)
         sheet = gc.open_by_key(SHEET_ID).sheet1
         records = sheet.get_all_records()
         
@@ -123,8 +126,11 @@ def calculate_statistics(records):
 
 def save_to_sheet(data):
     try:
-        
-        gc = gspread.service_account(filename=os.getenv("CREDENTIALS_PATH"))
+        creds_path = "temp_credentials.json"
+        with open(creds_path, "w") as f:
+            f.write(os.environ["GOOGLE_CREDS"])
+
+        gc = gspread.service_account(filename=creds_path)
         sheet = gc.open_by_key(SHEET_ID).sheet1
         # Add a timestamp and survey data
         row = [
