@@ -35,7 +35,7 @@ function updateAccordionCounts() {
 // Initialize all charts
 function initCharts() {
     // Destroy existing charts if they exist
-    ['knowledgeChart', 'prideDayChart', 'freedomZegamaChart', 'discriminationChart'].forEach(id => {
+    ['knowledgeChart', 'prideDayChart', 'freedomZegamaChart', 'freedomEuskalHerriaChart', 'discriminationChart', 'secureSpacesChart'].forEach(id => {
         const chart = Chart.getChart(id);
         if (chart) chart.destroy();
     });
@@ -46,15 +46,23 @@ function initCharts() {
     }
     
     if (statsData.proud_day && Object.keys(statsData.proud_day).length > 0) {
-        createChart('prideDayChart', 'pie', 'Ekainak 28 ezagutza', statsData.proud_day);
+        createChart('prideDayChart', 'pie', 'Badakizu zergatik ospatzen den harrotasun eguna ekainak 28an?', statsData.proud_day);
     }
     
     if (statsData.freedom_zegama && Object.keys(statsData.freedom_zegama).length > 0) {
         createChart('freedomZegamaChart', 'bar', 'Zure ustez, Zegaman norbaitek askatasun osoz bizi al dezake bere orientazioa edo identitatea?', statsData.freedom_zegama);
     }
+
+    if (statsData.freedom_euskal_herria && Object.keys(statsData.freedom_euskal_herria).length > 0) {
+        createChart('freedomEuskalHerriaChart', 'bar', 'Eta Euskal Herrian oro har?', statsData.freedom_euskal_herria);
+    }
     
     if (statsData.discrimination_experience && Object.keys(statsData.discrimination_experience).length > 0) {
-        createChart('discriminationChart', 'bar', 'Diskriminazio esperientziak', statsData.discrimination_experience);
+        createChart('discriminationChart', 'pie', 'Bizi izan duzu diskriminazio esperientziarik Zegaman orientazio edo generoagatik?', statsData.discrimination_experience);
+    }
+    
+    if (statsData.secure_spaces && Object.keys(statsData.secure_spaces).length > 0) {
+        createChart('secureSpacesChart', 'pie', 'Zegaman espazio seguru gehiago behar direla uste duzu?', statsData.secure_spaces);
     }
 }
 
