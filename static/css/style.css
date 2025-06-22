@@ -519,3 +519,12 @@ html {
     font-size: 0.7rem;
     margin-right: 10px;
 }
+
+.form-check-label {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+}
+.form-check-input {
+    cursor: pointer;
+}
