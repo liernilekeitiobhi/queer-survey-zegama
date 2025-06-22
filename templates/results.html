@@ -151,7 +151,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-header bg-light">Espazio seguruen beharra Zegaman</div>
-                        <div class="card-body"><canvas id="discriminationChart" height="300"></canvas></div>
+                        <div class="card-body"><canvas id="secureSpacesChart" height="300"></canvas></div>
                     </div>
                 </div>
             </div>
@@ -168,7 +168,9 @@
         knowledge: {{ stats.knowledge | tojson | safe }},
         proud_day: {{ stats.proud_day | tojson | safe }},
         freedom_zegama: {{ stats.freedom_zegama | tojson | safe }},
+        freedom_euskal_herria: {{ stats.freedom_euskal_herria | tojson | safe }},
         discrimination_experience: {{ stats.discrimination_experience | tojson | safe }},
+        secure_spaces: {{ stats.secure_spaces | tojson | safe }},
         current_filters: {{ current_filters | tojson | safe }}
     };
 </script>
